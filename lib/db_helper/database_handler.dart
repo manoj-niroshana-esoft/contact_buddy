@@ -99,4 +99,19 @@ class DatabaseHandler {
     );
   }
 
+  // A method that retrieves all the Contact from the Contact table.
+  Future<Contact> getContact(int id) async {
+    // Get a reference to the database.
+    final Database db = await initializeDB();
+
+    // Query the table for The Contact.
+    var data = await db.rawQuery('SELECT * FROM contacts where id=?', [id]);
+    // return Contact(
+    //   name: data['name'] ,
+    //   company: data['age'] as int,
+    //   email: data['age'] as int,
+    //   phoneNo: data['age'] as int,
+    // );
+    return Contact(name: "", email: "", phoneNo: "phoneNo", company: "company");
+  }
 }
