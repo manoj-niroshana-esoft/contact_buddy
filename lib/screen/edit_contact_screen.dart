@@ -24,6 +24,7 @@ class _EditContactScreenState extends State<EditContactScreen> {
   void initState() {
     super.initState();
     handler = DatabaseHandler();
+    handler.
   }
 
   @override
@@ -149,7 +150,7 @@ class _EditContactScreenState extends State<EditContactScreen> {
                     ),
                   ),
                   child: const Text(
-                    "SAVE",
+                    "Update",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

@@ -11,7 +11,7 @@ class DatabaseHandler {
       join(path, 'contact_buddy.db'),
       onCreate: (database, version) async {
         await database.execute(
-          "CREATE	TABLE	users(id	INTEGER	PRIMARY	KEY	AUTOINCREMENT,	name	TEXT	NOT NULL,	email	TEXT NOT NULL, password TEXT NOT NULL); CREATE	TABLE	contacts(id	INTEGER	PRIMARY	KEY	AUTOINCREMENT,	name	TEXT	NOT NULL,	email	TEXT NOT NULL, phoneNo TEXT NOT NULL, company TEXT);",
+          "CREATE	TABLE	users(id	INTEGER	PRIMARY	KEY	AUTOINCREMENT,	name	TEXT	NOT NULL,	email	TEXT NOT NULL, password TEXT NOT NULL); ",
         );
         await database.execute(
           "CREATE	TABLE	contacts(id	INTEGER	PRIMARY	KEY	AUTOINCREMENT,	name	TEXT	NOT NULL,	email	TEXT NOT NULL, phoneNo TEXT NOT NULL, company TEXT);",
@@ -81,6 +81,21 @@ class DatabaseHandler {
       'contacts',
       where: "id	=	?",
       whereArgs: [id],
+    );
+  }
+
+  Future<void> updateContact(Contact contact) async {
+    // Get a reference to the database.
+    final Database db = await initializeDB();
+
+    // Update the given Contact.
+    await db.update(
+      'contacts',
+      contact.toMap(),
+      // Ensure that the Contact has a matching id.
+      where: 'id = ?',
+      // Pass the Contact's id as a whereArg to prevent SQL injection.
+      whereArgs: [contact.id],
     );
   }
 
