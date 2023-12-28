@@ -6,7 +6,7 @@ import '../model/user.dart';
 import 'home_screen.dart';
 
 class EditContactScreen extends StatefulWidget {
-  final int editId;
+  final  int editId;
   const EditContactScreen({super.key,  required this.editId});
 
   @override
@@ -20,11 +20,13 @@ class _EditContactScreenState extends State<EditContactScreen> {
   TextEditingController companyTextController = TextEditingController();
   TextEditingController contactTextController = TextEditingController();
 
+  int get editId => this.editId;
+
   @override
   void initState() {
     super.initState();
     handler = DatabaseHandler();
-    handler.
+    handler.getContact(editId);
   }
 
   @override
